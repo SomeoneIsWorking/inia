@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using System.IO;
 using CsvHelper;
 using CsvHelper.Configuration;
 using System.Globalization;
@@ -106,7 +105,6 @@ namespace IniaApi.Controllers
                 Delimiter = "\t",
                 HasHeaderRecord = true
             };
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             using var reader = new StreamReader("WEOOct2023all.xls", Encoding.GetEncoding("ISO-8859-9"));
             using var csv = new CsvReader(reader, config);
             csv.Read();
