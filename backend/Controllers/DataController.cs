@@ -76,6 +76,7 @@ namespace IniaApi.Controllers
                         Code = d.CountryCode
                     })
                     .DistinctBy(x => x.Code)
+                    .Where(s => !string.IsNullOrWhiteSpace(s.Name))
                     .OrderBy(s => s.Name)
                     .ToList();
             })!;
@@ -93,6 +94,7 @@ namespace IniaApi.Controllers
                         Code = d.Subject
                     })
                     .DistinctBy(x => x.Code)
+                    .Where(s => !string.IsNullOrWhiteSpace(s.Name))
                     .OrderBy(s => s.Name)
                     .ToList();
             })!;
@@ -104,7 +106,7 @@ namespace IniaApi.Controllers
                 Delimiter = "\t",
                 HasHeaderRecord = true
             };
-                    Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             using var reader = new StreamReader("WEOOct2023all.xls", Encoding.GetEncoding("ISO-8859-9"));
             using var csv = new CsvReader(reader, config);
             csv.Read();
